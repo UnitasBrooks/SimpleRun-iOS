@@ -22,6 +22,8 @@ class ViewController: UIViewController {
     @IBAction func refreshClicked(sender: AnyObject) {
         latText.text = lhm.getLong()
         longText.text = lhm.getLat()
+        print("here")
+        
     }
 
     

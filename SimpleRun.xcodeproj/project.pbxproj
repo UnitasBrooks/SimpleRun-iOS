@@ -14,6 +14,7 @@
 		0B92275E1B126FF7008FC398 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0B92275C1B126FF7008FC398 /* LaunchScreen.xib */; };
 		0B92276A1B126FF7008FC398 /* SimpleRunTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9227691B126FF7008FC398 /* SimpleRunTests.swift */; };
 		0B9227741B1277D1008FC398 /* LocationHandlerModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9227731B1277D1008FC398 /* LocationHandlerModel.swift */; };
+		0BE16E601B1AA1C2004B9083 /* DistanceCalculator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE16E5F1B1AA1C2004B9083 /* DistanceCalculator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -38,6 +39,7 @@
 		0B9227681B126FF7008FC398 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0B9227691B126FF7008FC398 /* SimpleRunTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleRunTests.swift; sourceTree = "<group>"; };
 		0B9227731B1277D1008FC398 /* LocationHandlerModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LocationHandlerModel.swift; path = ../LocationHandlerModel.swift; sourceTree = "<group>"; };
+		0BE16E5F1B1AA1C2004B9083 /* DistanceCalculator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DistanceCalculator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +88,7 @@
 				0B92275A1B126FF7008FC398 /* Images.xcassets */,
 				0B92275C1B126FF7008FC398 /* LaunchScreen.xib */,
 				0B9227511B126FF7008FC398 /* Supporting Files */,
+				0BE16E5F1B1AA1C2004B9083 /* DistanceCalculator.swift */,
 			);
 			path = SimpleRun;
 			sourceTree = "<group>";
@@ -215,6 +218,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0BE16E601B1AA1C2004B9083 /* DistanceCalculator.swift in Sources */,
 				0B9227561B126FF7008FC398 /* ViewController.swift in Sources */,
 				0B9227741B1277D1008FC398 /* LocationHandlerModel.swift in Sources */,
 				0B9227541B126FF7008FC398 /* AppDelegate.swift in Sources */,
@@ -413,6 +417,7 @@
 				0B92276F1B126FF7008FC398 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		0B9227701B126FF7008FC398 /* Build configuration list for PBXNativeTarget "SimpleRunTests" */ = {
 			isa = XCConfigurationList;
@@ -421,6 +426,7 @@
 				0B9227721B126FF7008FC398 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

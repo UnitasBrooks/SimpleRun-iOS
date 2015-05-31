@@ -20,6 +20,8 @@ class LocationHandlerModel : NSObject, CLLocationManagerDelegate {
     private var latitude: String = ""
     // Handles permissions to use GPS/location
     private var locationManager = CLLocationManager()
+    // Holds a list of recent distances and calculates the total
+    
     
     // Constructor
     override init() {
@@ -45,6 +47,7 @@ class LocationHandlerModel : NSObject, CLLocationManagerDelegate {
         self.latitude = location.coordinate.latitude.description
         println("latitude: " + self.latitude)
         println("longitude: " + self.longitude)
+        
     }
     
     // This function handles authorization requests
