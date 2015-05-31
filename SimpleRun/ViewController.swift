@@ -17,13 +17,14 @@ class ViewController: UIViewController {
     @IBOutlet var latText: UITextView!
     @IBOutlet var longText: UITextView!
     @IBOutlet var reloadButton: UIButton!
+    @IBOutlet var distanceText: UITextView!
     var lhm = LocationHandlerModel()
 
-    @IBAction func refreshClicked(sender: AnyObject) {
+    @IBAction func refreshClicked(sender: AnyObject)
+    {
         latText.text = lhm.getLong()
         longText.text = lhm.getLat()
-        print("here")
-        
+        distanceText.text = lhm.getDistance()
     }
 
     

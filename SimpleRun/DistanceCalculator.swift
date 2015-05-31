@@ -18,8 +18,8 @@ public class DistanceCalculator {
     
     public func returnTotalDistance(location: CLLocation) -> Double {
         var distanceInMeters = lastLocation.distanceFromLocation(location)
-        distanceInMiles += distanceInMeters * 0.00062137
-        lastLocation = location
+        self.distanceInMiles += distanceInMeters * 0.00062137
+        self.lastLocation = location
         return distanceInMiles
     }
     
