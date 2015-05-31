@@ -84,11 +84,11 @@
 				0B9227731B1277D1008FC398 /* LocationHandlerModel.swift */,
 				0B9227531B126FF7008FC398 /* AppDelegate.swift */,
 				0B9227551B126FF7008FC398 /* ViewController.swift */,
+				0BE16E5F1B1AA1C2004B9083 /* DistanceCalculator.swift */,
 				0B9227571B126FF7008FC398 /* Main.storyboard */,
 				0B92275A1B126FF7008FC398 /* Images.xcassets */,
 				0B92275C1B126FF7008FC398 /* LaunchScreen.xib */,
 				0B9227511B126FF7008FC398 /* Supporting Files */,
-				0BE16E5F1B1AA1C2004B9083 /* DistanceCalculator.swift */,
 			);
 			path = SimpleRun;
 			sourceTree = "<group>";

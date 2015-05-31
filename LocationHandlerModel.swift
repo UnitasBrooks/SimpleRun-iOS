@@ -20,7 +20,10 @@ class LocationHandlerModel : NSObject, CLLocationManagerDelegate {
     private var latitude: String = ""
     // Handles permissions to use GPS/location
     private var locationManager = CLLocationManager()
-    // Holds a list of recent distances and calculates the total
+    // Helper class to crunch distance calculations
+    private var distanceCalculator = DistanceCalculator()
+    // Distance in miles
+    private var distanceInMiles: Double = 0.0
     
     
     // Constructor
@@ -40,6 +43,11 @@ class LocationHandlerModel : NSObject, CLLocationManagerDelegate {
         return self.latitude
     }
     
+    func getDistance() -> String {
+        var distString: String = String(format:"%f", self.distanceInMiles)
+        return distString
+    }
+    
     // This function updates the latitude and longitude as well as the location object periodically
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         self.location = locations.last as! CLLocation
@@ -47,6 +55,7 @@ class LocationHandlerModel : NSObject, CLLocationManagerDelegate {
         self.latitude = location.coordinate.latitude.description
         println("latitude: " + self.latitude)
         println("longitude: " + self.longitude)
+        self.distanceInMiles = distanceCalculator.returnTotalDistance(self.location)
         
     }
     

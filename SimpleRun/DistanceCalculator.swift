@@ -17,8 +17,11 @@ public class DistanceCalculator {
     init() {}
     
     public func returnTotalDistance(location: CLLocation) -> Double {
-        var distanceInMeters = lastLocation.distanceFromLocation(location)
-        self.distanceInMiles += distanceInMeters * 0.00062137
+        if(lastLocation.coordinate.latitude != 0){
+            var distanceInMeters = lastLocation.distanceFromLocation(location)
+            self.distanceInMiles += distanceInMeters * 0.00062137
+        }
+        
         self.lastLocation = location
         return distanceInMiles
     }
