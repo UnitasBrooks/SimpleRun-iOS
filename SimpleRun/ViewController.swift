@@ -19,24 +19,31 @@ class ViewController: UIViewController {
     @IBOutlet var reloadButton: UIButton!
     @IBOutlet var distanceText: UITextView!
     var lhm = LocationHandlerModel()
-
+    let queue = NSOperationQueue()
+    var onOff = false
+    
     @IBAction func refreshClicked(sender: AnyObject)
     {
         latText.text = lhm.getLong()
         longText.text = lhm.getLat()
         distanceText.text = lhm.getDistance()
         
+        onOff = !onOff
+        if(!onOff) {
+            println("here")
+            queue.suspended = true
+        }
         
-        /*let qualityOfServiceClass = QOS_CLASS_BACKGROUND
-        let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
         
-        dispatch_async(backgroundQueue, {
-            println("This is run on the background queue")
-            
-            dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                println("This is run on the main queue, after the previous code in outer block")
-            })
-        })*/
+        queue.addOperationWithBlock() {
+            while(self.onOff) {
+                NSOperationQueue.mainQueue().addOperationWithBlock() {
+                    self.latText.text = self.lhm.getLong()
+                    self.longText.text = self.lhm.getLat()
+                    self.distanceText.text = self.lhm.getDistance()
+                }
+            }
+        }
     }
 
     

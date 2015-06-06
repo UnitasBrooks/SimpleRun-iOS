@@ -53,8 +53,11 @@ class LocationHandlerModel : NSObject, CLLocationManagerDelegate {
         self.location = locations.last as! CLLocation
         self.longitude = location.coordinate.longitude.description
         self.latitude = location.coordinate.latitude.description
-        println("latitude: " + self.latitude)
-        println("longitude: " + self.longitude)
+        
+        // for debugging
+        //println("latitude: " + self.latitude)
+        //println("longitude: " + self.longitude)
+        
         self.distanceInMiles = distanceCalculator.returnTotalDistance(self.location)
         
     }
