@@ -21,14 +21,8 @@ class ViewController: UIViewController {
     @IBOutlet var distanceText: UITextView!
     var lhm = LocationHandlerModel()
     var onOff = false
-    var runInProgress = NSOperation()
-
     
-    @IBAction func refreshClicked(sender: AnyObject)
-    {
-        latText.text = lhm.getLong()
-        longText.text = lhm.getLat()
-        distanceText.text = lhm.getDistance()
+    @IBAction func refreshClicked(sender: AnyObject) {
         onOff = !onOff
         if(onOff) {
             startRun()
@@ -36,7 +30,6 @@ class ViewController: UIViewController {
         } else {
             reloadButton.setTitle("Start", forState: .Normal)
         }
-        
     }
     
     private func startRun() {
