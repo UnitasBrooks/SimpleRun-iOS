@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Darwin
 
 class ViewController: UIViewController {
     
@@ -19,31 +20,37 @@ class ViewController: UIViewController {
     @IBOutlet var reloadButton: UIButton!
     @IBOutlet var distanceText: UITextView!
     var lhm = LocationHandlerModel()
-    let queue = NSOperationQueue()
     var onOff = false
+    var runInProgress = NSOperation()
+
     
     @IBAction func refreshClicked(sender: AnyObject)
     {
         latText.text = lhm.getLong()
         longText.text = lhm.getLat()
         distanceText.text = lhm.getDistance()
-        
         onOff = !onOff
-        if(!onOff) {
-            println("here")
-            queue.suspended = true
+        if(onOff) {
+            startRun()
+            reloadButton.setTitle("Stop", forState: .Normal)
+        } else {
+            reloadButton.setTitle("Start", forState: .Normal)
         }
         
-        
-        queue.addOperationWithBlock() {
+    }
+    
+    private func startRun() {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), { () -> Void in
             while(self.onOff) {
-                NSOperationQueue.mainQueue().addOperationWithBlock() {
+                dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                    //println("update the UI")
                     self.latText.text = self.lhm.getLong()
                     self.longText.text = self.lhm.getLat()
                     self.distanceText.text = self.lhm.getDistance()
-                }
+                })
+                sleep(1)
             }
-        }
+        })
     }
 
     
