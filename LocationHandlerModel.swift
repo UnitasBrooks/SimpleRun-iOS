@@ -24,6 +24,9 @@ class LocationHandlerModel : NSObject, CLLocationManagerDelegate {
     private var distanceCalculator = DistanceCalculator()
     // Distance in miles
     private var distanceInMiles: Double = 0.0
+    // Bool for whether we should track average speed and distance
+    private var running: Bool = false
+    private var time: Int = 0
     
     
     // Constructor
@@ -43,23 +46,40 @@ class LocationHandlerModel : NSObject, CLLocationManagerDelegate {
         return self.latitude
     }
     
+    // Return the distance in string format
     func getDistance() -> String {
         var distString: String = String(format:"%f", self.distanceInMiles)
         return distString
     }
+    
+    // Turn tracking on and off
+    func toggleTracking() {
+        self.running = !self.running
+    }
+    
+    func incrementTime() {
+        if(self.running) {
+            time++
+        }
+    }
+    
     
     // This function updates the latitude and longitude as well as the location object periodically
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         self.location = locations.last as! CLLocation
         self.longitude = location.coordinate.longitude.description
         self.latitude = location.coordinate.latitude.description
+        if(self.running) {
+            self.distanceInMiles = distanceCalculator.returnTotalDistance(self.location)
+            distanceCalculator.returnMilesPerMinute(self.time)
+        }
         
+        /* 
         // for debugging
-        //println("latitude: " + self.latitude)
-        //println("longitude: " + self.longitude)
-        
-        self.distanceInMiles = distanceCalculator.returnTotalDistance(self.location)
-        
+        println("latitude: " + self.latitude)
+        println("longitude: " + self.longitude)
+        println(distanceInMiles)
+        */
     }
     
     // This function handles authorization requests
@@ -68,16 +88,16 @@ class LocationHandlerModel : NSObject, CLLocationManagerDelegate {
         
         switch status {
         case .NotDetermined:
-            println(".NotDetermined")
+            println("NotDetermined")
             break
             
         case .AuthorizedAlways:
-            println(".Authorized")
+            println("Authorized GPS")
             self.locationManager.startUpdatingLocation()
             break
             
         case .Denied:
-            println(".Denied")
+            println("Denied")
             break
             
         default:

@@ -26,6 +26,9 @@ public class DistanceCalculator {
         return distanceInMiles
     }
     
-    public func returnMilesPerMinute(timeInSeconds: Double) -> Double { return distanceInMiles / timeInSeconds * 60 }
+    public func returnMilesPerMinute(timeInSeconds: Int) -> Double {
+        var avgSpeed = (Double(timeInSeconds) / 60)  / distanceInMiles
+        return avgSpeed
+    }
 }
 

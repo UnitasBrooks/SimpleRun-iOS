@@ -26,6 +26,7 @@ class ViewController: UIViewController {
         onOff = !onOff
         if(onOff) {
             startRun()
+            lhm.toggleTracking()
             reloadButton.setTitle("Stop", forState: .Normal)
         } else {
             reloadButton.setTitle("Start", forState: .Normal)
@@ -35,6 +36,7 @@ class ViewController: UIViewController {
     private func startRun() {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), { () -> Void in
             while(self.onOff) {
+                self.lhm.incrementTime();
                 dispatch_async(dispatch_get_main_queue(), { () -> Void in
                     //println("update the UI")
                     self.latText.text = self.lhm.getLong()
