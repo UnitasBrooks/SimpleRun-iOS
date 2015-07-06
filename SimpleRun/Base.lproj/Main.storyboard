@@ -65,6 +65,18 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Minutes Per Mile" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6zi-4E-2cC">
+                                <rect key="frame" x="2" y="233" width="129" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" text="0.0" translatesAutoresizingMaskIntoConstraints="NO" id="FTM-Rn-07b">
+                                <rect key="frame" x="2" y="254" width="294" height="38"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
@@ -74,6 +86,7 @@
                     </view>
                     <navigationItem key="navigationItem" title="SimpleRun" id="G1w-zI-juQ"/>
                     <connections>
+                        <outlet property="avgSpeedTxt" destination="FTM-Rn-07b" id="T9c-pH-I97"/>
                         <outlet property="distanceText" destination="ZML-ip-Xbr" id="4Wj-Yg-lnM"/>
                         <outlet property="latLabel" destination="M9h-ig-AiW" id="tbT-N7-S3d"/>
                         <outlet property="latText" destination="3yF-fA-hNh" id="1Si-YN-6k5"/>

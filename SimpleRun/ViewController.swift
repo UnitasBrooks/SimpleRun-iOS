@@ -13,6 +13,7 @@ class ViewController: UIViewController {
     
 
 
+    @IBOutlet var avgSpeedTxt: UITextView!
     @IBOutlet var longLabel: UILabel!
     @IBOutlet var latLabel: UILabel!
     @IBOutlet var latText: UITextView!
@@ -20,32 +21,41 @@ class ViewController: UIViewController {
     @IBOutlet var reloadButton: UIButton!
     @IBOutlet var distanceText: UITextView!
     var lhm = LocationHandlerModel()
-    var onOff = false
-    
+    var running: Bool = false
     @IBAction func refreshClicked(sender: AnyObject) {
-        onOff = !onOff
-        if(onOff) {
-            startRun()
-            lhm.toggleTracking()
+        var timer = NSTimer()
+        running = !running
+        if(lhm.toggleTracking()) {
+            timer = NSTimer.scheduledTimerWithTimeInterval(1, target: self, selector: Selector("update:"), userInfo: nil, repeats: true)
             reloadButton.setTitle("Stop", forState: .Normal)
         } else {
+            timer.invalidate()
+            timer = nil
             reloadButton.setTitle("Start", forState: .Normal)
         }
     }
     
+    /* Keeping this in as an example of how to work with threads, because I am bound to forget
     private func startRun() {
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), { () -> Void in
-            while(self.onOff) {
-                self.lhm.incrementTime();
-                dispatch_async(dispatch_get_main_queue(), { () -> Void in
-                    //println("update the UI")
-                    self.latText.text = self.lhm.getLong()
-                    self.longText.text = self.lhm.getLat()
-                    self.distanceText.text = self.lhm.getDistance()
-                })
-                sleep(1)
-            }
+           
+            dispatch_async(dispatch_get_main_queue(), { () -> Void in
+                //println("update the UI")
+    
+            })
         })
+    }*/
+    
+    @objc func update(timer: NSTimer) {
+        if(running){
+            println("updating")
+            self.lhm.incrementTime()
+            self.latText.text = self.lhm.getLong()
+            self.longText.text = self.lhm.getLat()
+            self.distanceText.text = self.lhm.getDistance()
+            self.avgSpeedTxt.text = self.lhm.getAvgSpeed()
+        }
+        
     }
 
     

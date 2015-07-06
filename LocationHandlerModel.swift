@@ -26,7 +26,11 @@ class LocationHandlerModel : NSObject, CLLocationManagerDelegate {
     private var distanceInMiles: Double = 0.0
     // Bool for whether we should track average speed and distance
     private var running: Bool = false
+    // Elapsed time
     private var time: Int = 0
+    // Minutes per mile, only tracked while running is true
+    private var minutesPerMile: Double = 0.0
+
     
     
     // Constructor
@@ -52,48 +56,57 @@ class LocationHandlerModel : NSObject, CLLocationManagerDelegate {
         return distString
     }
     
-    // Turn tracking on and off
-    func toggleTracking() {
-        self.running = !self.running
+    // Returns average speed in string format
+    func getAvgSpeed() -> String {
+        var mmString: String = String(format:"%f", self.minutesPerMile)
+        return mmString
     }
     
+    // Turn tracking on and off
+    func toggleTracking() -> Bool {
+        self.running = !self.running
+        if(self.running) {
+            println("Started tracking run")
+            distanceCalculator.setLastLocation(location)
+            self.locationManager.startUpdatingLocation()
+        } else {
+            println("Stopped tracking run")
+            self.locationManager.stopUpdatingLocation()
+        }
+        
+        return self.running
+    }
+    
+    
+    // A second has passed, record it if we are actively running
     func incrementTime() {
         if(self.running) {
-            time++
+            self.time++
         }
     }
-    
     
     // This function updates the latitude and longitude as well as the location object periodically
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-        self.location = locations.last as! CLLocation
-        self.longitude = location.coordinate.longitude.description
-        self.latitude = location.coordinate.latitude.description
         if(self.running) {
+            self.location = locations.last as! CLLocation
+            self.longitude = self.location.coordinate.longitude.description
+            self.latitude = self.location.coordinate.latitude.description
             self.distanceInMiles = distanceCalculator.returnTotalDistance(self.location)
-            distanceCalculator.returnMilesPerMinute(self.time)
+            self.minutesPerMile = distanceCalculator.returnMilesPerMinute(self.time)
         }
-        
-        /* 
-        // for debugging
-        println("latitude: " + self.latitude)
-        println("longitude: " + self.longitude)
-        println(distanceInMiles)
-        */
     }
     
     // This function handles authorization requests
     func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
-        println("didChangeAuthorizationStatus")
+        println("Changed Auth Status")
         
         switch status {
         case .NotDetermined:
-            println("NotDetermined")
+            println("Not Determined")
             break
             
         case .AuthorizedAlways:
             println("Authorized GPS")
-            self.locationManager.startUpdatingLocation()
             break
             
         case .Denied:
